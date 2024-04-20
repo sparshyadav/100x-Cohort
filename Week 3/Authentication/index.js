@@ -55,6 +55,15 @@ app.post("/signin", (req, res) => {
     })
 })
 
+app.get("/users", (req, res)=>{
+    const token=req.headers.authorization;
+    const decode=jwt.verify(token, jwtPassword);
+
+    res.json({
+        users: ALL_USERS
+    })
+})
+
 app.listen(3000, () => {
     console.log("Server Started at PORT: 3000");
 })
