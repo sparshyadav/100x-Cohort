@@ -31,8 +31,17 @@ function kidneyMiddleware(req, res, next) {
     }
 }
 
-app.get("/health-checkup", userMiddleware, kidneyMiddleware, (req, res) => {
-    res.send("Your Kidneys are Fine");
+app.get("/health-checkup", (req, res) => {
+    const kidneys=req.query.kidneyId;
+    const kidneyCount=kidneys.length;
+
+    res.send(kidneyCount);
+})
+
+app.use((err, req, res, next)=>{
+    res.json({
+        msg: "Sorry Something is Up with the Server"
+    })
 })
 
 app.listen(3000, () => {
