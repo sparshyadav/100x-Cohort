@@ -4,26 +4,35 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/health-checkup", (req, res) => {
+function userMiddleware(req, res, next) {
     const username = req.headers.username;
     const password = req.headers.password;
-    const kidneyId = req.query.kidneyId;
 
     if (username != "sparsh" || password != "pass") {
-        return res.status(400).json({
-            msg: "Something is Wrong with Username or Password"
+        return res.status(403).json({
+            msg: "Incorrect Username or Password"
         })
     }
+    else {
+        next();
+    }
+}
+
+function kidneyMiddleware(req, res, next) {
+    const kidneyId = req.query.kidneyId;
 
     if (kidneyId != 1 && kidneyId != 2) {
-        return res.status(400).json({
-            msg: "Something is Wrong with your Inputs"
+        res.send(403).json({
+            msg: "Incorrect Inputs"
         })
     }
+    else {
+        next();
+    }
+}
 
-    res.json({
-        msg: "Your Kidneys are Fine"
-    })
+app.get("/health-checkup", userMiddleware, kidneyMiddleware, (req, res) => {
+    res.send("Your Kidneys are Fine");
 })
 
 app.listen(3000, () => {
