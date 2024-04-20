@@ -22,7 +22,7 @@ function kidneyMiddleware(req, res, next) {
     const kidneyId = req.query.kidneyId;
 
     if (kidneyId != 1 && kidneyId != 2) {
-        res.send(403).json({
+        return res.send(403).json({
             msg: "Incorrect Inputs"
         })
     }
