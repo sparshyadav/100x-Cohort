@@ -4,25 +4,23 @@ const app = express();
 
 app.use(express.json());
 
-function isOldEnough(age) {
+function isOldEnough(req, res, next) {
+    const age = req.query.age;
+
     if (age >= 14) {
-        return true;
+        next();
     }
 
-    return false;
+    res.json({
+        msg: "You are not Old Enough"
+    })
 }
 
-app.get("/ticket", (req, res) => {
-    if (isOldEnough(req.query.age)) {
-        res.json({
-            msg: "You have rode ride 1"
-        })
-    }
-    else {
-        res.status(401).json({
-            msg: "Your Age is not Enough to Ride ride 1"
-        })
-    }
+app.get("/ticket", isOldEnough, (req, res) => {
+    res.json({
+        msg: "You have rode ride 1"
+    })
+
 })
 
 app.listen(3000, () => {
