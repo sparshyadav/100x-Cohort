@@ -12,3 +12,7 @@ console.log("This is Your Token - " + token);
 const verifyToken = jwt.verify(token, "secret");
 console.log("This is Your Verification - ");
 console.log(verifyToken);
+
+const decodedToken = jwt.decode(token);
+console.log("This is Your Decoded Token - ")
+console.log(decodedToken);
