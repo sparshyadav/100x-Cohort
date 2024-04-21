@@ -7,4 +7,8 @@ const value = {
 }
 
 const token = jwt.sign(value, "secret");
-console.log(token);
+console.log("This is Your Token - " + token);
+
+const verifyToken = jwt.verify(token, "secret");
+console.log("This is Your Verification - ");
+console.log(verifyToken);
