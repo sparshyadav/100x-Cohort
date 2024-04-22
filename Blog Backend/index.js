@@ -1,20 +1,20 @@
-const express=require("express");
+const express = require("express");
 const connectDatabase = require("./config/database");
-const blogRoutes=require("./routes/blog");
+const blogRoutes = require("./routes/blog");
 require("dotenv").config();
 
-const PORT=process.env.PORT || 3000;
-const app=express();
+const PORT = process.env.PORT || 3000;
+const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res)=>{
+app.get("/", (req, res) => {
     res.send(`<h1>This is Homepage for Blog APP</h1>`)
 })
 
 app.use("/blog", blogRoutes);
 
 connectDatabase();
-app.listen(PORT, ()=>{
+app.listen(PORT, () => {
     console.log(`Server Started at PORT ${PORT}`);
 })
