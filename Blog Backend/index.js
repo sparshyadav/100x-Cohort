@@ -12,6 +12,7 @@ app.get("/", (req, res)=>{
     res.send(`<h1>This is Homepage for Blog APP</h1>`)
 })
 
+app.use("/blog", blogRoutes);
 
 connectDatabase();
 app.listen(PORT, ()=>{
