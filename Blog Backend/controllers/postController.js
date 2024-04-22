@@ -4,7 +4,7 @@ exports.createPost = async (req, res) => {
     try {
         const { title, body } = req.body;
 
-        const post=new Post({
+        const post = new Post({
             title, body
         })
 

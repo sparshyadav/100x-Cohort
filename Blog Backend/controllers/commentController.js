@@ -19,7 +19,7 @@ exports.createComment = async (req, res) => {
             },
             { new: true }
         )
-        .populate("comments").exec();
+            .populate("comments").exec();
 
         res.json({
             success: true,
